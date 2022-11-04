@@ -5,9 +5,9 @@
 
 
 BitVector::BitVector(std::size_t size)
+ : m_size(size),
+   m_bytes((size + 0x07) >> 3)
 {
-    m_size = size;
-    m_bytes.resize((size + (~size & 7) + 1) >> 3);
 }
 
 
@@ -22,7 +22,7 @@ bool BitVector::at(std::size_t index) const
         throw std::range_error("Given index is out of range");
     }
 
-    return (m_bytes[index >> 3] >> (index & 7)) & 1;
+    return (m_bytes[index >> 3] >> (index & 0x07)) & 1;
 }
 
 void BitVector::at(std::size_t index, bool value)
@@ -31,5 +31,5 @@ void BitVector::at(std::size_t index, bool value)
         throw std::range_error("Given index is out of range");
     }
 
-    m_bytes[index >> 3] ^= (at(index) ^ (value)) << (index & 7);
+    m_bytes[index >> 3] ^= (at(index) ^ (value)) << (index & 0x07);
 }

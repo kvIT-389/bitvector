@@ -11,13 +11,13 @@ class BitVector
     using Byte_t = std::uint8_t;
 
     BitVector() = default;
-    BitVector(const BitVector &) = default;
-    BitVector(BitVector &&) = default;
+    BitVector(const BitVector &other) = default;
+    BitVector(BitVector &&other) = default;
 
     BitVector(std::size_t size);
 
-    BitVector &operator=(const BitVector &) = default;
-    BitVector &operator=(BitVector &&) = default;
+    BitVector &operator=(const BitVector &other) = default;
+    BitVector &operator=(BitVector &&other) = default;
 
     ~BitVector() = default;
 
