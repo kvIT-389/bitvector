@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 
@@ -32,4 +33,20 @@ void BitVector::at(std::size_t index, bool value)
     }
 
     m_bytes[index >> 3] ^= (at(index) ^ (value)) << (index & 0x07);
+}
+
+
+std::ostream &operator<<(
+    std::ostream &os, const BitVector &vector
+)
+{
+    for (BitVector::Byte_t byte : vector.m_bytes) {
+        for (std::uint8_t i = 0; i < 8; ++i) {
+            os << (byte & 1);
+            byte >>= 1;
+        }
+        os << ' ';
+    }
+
+    return os << '\b';
 }

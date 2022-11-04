@@ -2,6 +2,7 @@
 #define BITVECTOR_HPP_INCLUDED_ 1
 
 
+#include <iostream>
 #include <vector>
 
 
@@ -25,6 +26,10 @@ class BitVector
 
     bool at(std::size_t index) const;
     void at(std::size_t index, bool value);
+
+    friend std::ostream &operator<<(
+      std::ostream &os, const BitVector &vector
+    );
 
   private:
     std::size_t m_size;
